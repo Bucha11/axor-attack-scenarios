@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cloud-exfil"
+version = "0.1.0"
+description = "Cloud-credential exfiltration showcase — raw exfil vs Axor taint containment"
+requires-python = ">=3.11"
+dependencies = [
+    "axor-core>=0.7.0,<0.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.4"]
+telemetry = ["axor-telemetry>=0.1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["attack", "defense", "simulation"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
